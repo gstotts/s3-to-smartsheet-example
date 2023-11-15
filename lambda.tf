@@ -7,11 +7,11 @@
 resource "aws_lambda_function" "file_drop_lambda" {
   function_name = "reporting-lambda"
 
-  filename         = "${path.module}/functions/report_to_smartsheet/report_to_smartsheet.zip"
+  filename         = "${path.module}/functions/report_to_smartsheet/ReportToSmartsheet.zip"
   role             = aws_iam_role.reporting_lambda_role.arn
   handler          = "ReportToSmartsheet.lambda_handler"
   runtime          = "python3.11"
-  source_code_hash = filebase64sha256("${path.module}/functions/report_to_smartsheet/report_to_smartsheet.zip")
+  source_code_hash = filebase64sha256("${path.module}/functions/report_to_smartsheet/ReportToSmartsheet.zip")
 
   tags = merge({ "Name" : "reporting-lambda" }, var.tag_all)
 }
