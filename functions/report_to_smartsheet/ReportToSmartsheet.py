@@ -19,7 +19,7 @@ def lambda_handler(event, context):
         print(response)
         return {
             'statusCode': 200,
-            'body': json.dumps({'Object Response': response})
+            'body': response
         }
     except Exception as e:
         print(f'[-] Error Retreiving Object {key} from {bucket}')
