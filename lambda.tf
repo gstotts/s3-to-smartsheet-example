@@ -12,7 +12,7 @@ resource "aws_lambda_function" "file_drop_lambda" {
   handler          = "ReportToSmartsheet.lambda_handler"
   runtime          = "python3.11"
   source_code_hash = filebase64sha256("${path.module}/functions/report_to_smartsheet/ReportToSmartsheet.zip")
-  layers           = [aws_lambda_layer_version.aws_lambda_layer_version.smartsheet_lambda_layer.arn]
+  layers           = [aws_lambda_layer_version.smartsheet_lambda_layer.arn]
 
   tags = merge({ "Name" : "reporting-lambda" }, var.tag_all)
 }
