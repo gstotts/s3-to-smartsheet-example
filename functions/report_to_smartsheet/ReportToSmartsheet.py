@@ -16,6 +16,7 @@ def lambda_handler(event, context):
         print(f'[+] Retrieving Object {key} from {bucket}')
         response = s3.get_object(Bucket=bucket, Key=key)
         print(f'[+] Object {key} Retrieved from {bucket}')
+        print(response)
         return {
             'statusCode': 200,
             'body': json.dumps({'Object Response': response})
