@@ -9,7 +9,7 @@ resource "aws_lambda_function" "file_drop_lambda" {
 
   filename         = "${path.module}/functions/report_to_smartsheet/ReportToSmartsheet.zip"
   role             = aws_iam_role.reporting_lambda_role.arn
-  handler          = "ReportToSmartsheet.lambda_handler"
+  handler          = "/functions/report_to_smartsheet.ReportToSmartsheet.lambda_handler"
   runtime          = "python3.11"
   source_code_hash = filebase64sha256("${path.module}/functions/report_to_smartsheet/ReportToSmartsheet.zip")
 
