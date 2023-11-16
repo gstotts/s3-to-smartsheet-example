@@ -15,13 +15,13 @@ def lambda_handler(event, context):
     try:
         print(f'[+] Retrieving Object {key} from {bucket}')
         response = s3.get_object(Bucket=bucket, Key=key)
-        print(f'[+] Object {key} Retrieved from {bucket}')
-        print(response)
-        return {
-            'statusCode': 200,
-            'body': response
-        }
     except Exception as e:
         print(f'[-] Error Retreiving Object {key} from {bucket}')
         print(e)
         raise e
+    print(f'[+] Object {key} Retrieved from {bucket}')
+    print(response)
+    return {
+        'statusCode': 200,
+        'body': response
+    }
