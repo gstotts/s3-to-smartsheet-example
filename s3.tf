@@ -6,11 +6,6 @@ resource "aws_s3_bucket" "reporting_bucket" {
   tags   = merge({ "Name" : "reporting-${local.account_id}" }, var.tag_all)
 }
 
-resource "aws_s3_bucket_acl" "reporting_acl" {
-  bucket = aws_s3_bucket.reporting_bucket.id
-  acl    = "private"
-}
-
 resource "aws_s3_bucket_versioning" "reporting_versioning" {
   bucket = aws_s3_bucket.reporting_bucket.id
   versioning_configuration {
