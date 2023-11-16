@@ -33,9 +33,18 @@ resource "aws_iam_policy" "reporting_lambda_iam_policy" {
     Statement = [
       {
         Action = [
+          "logs:PutLogEvents",
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream"
+        ]
+        Effect   = "Allow",
+        Resource = "arn:aws:logs:*:*:*"
+      },
+      {
+        Action = [
           "s3:GetObject"
         ]
-        Effect  = "Allow",
+        Effect   = "Allow",
         Resource = "${aws_s3_bucket.reporting_bucket.arn}/*"
       }
     ]
