@@ -1,7 +1,6 @@
 #!/bin/python3
 
 import boto3
-import json
 import urllib.parse
 
 region = "us-east-2"
