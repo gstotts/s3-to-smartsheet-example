@@ -35,7 +35,7 @@ resource "aws_iam_policy" "reporting_lambda_iam_policy" {
         Action = [
           "s3:GetObject"
         ]
-        Effect  = "Allow"
+        Effect  = "Allow",
         Resouce = "${aws_s3_bucket.reporting_bucket.arn}/*"
       }
     ]
