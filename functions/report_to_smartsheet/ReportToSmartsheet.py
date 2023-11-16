@@ -21,6 +21,6 @@ def lambda_handler(event, context):
     print(f'[+] Object {key} Retrieved from {bucket}')
     print(response)
     return {
-        'statusCode': 200,
-        'body': response
+        'statusCode': response['HTTPStatusCode'],
+        'body': response['Body']
     }
