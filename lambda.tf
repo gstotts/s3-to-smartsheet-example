@@ -23,3 +23,10 @@ resource "aws_lambda_permission" "allow_s3_invoke_lambda" {
   principal     = "s3.amazonaws.com"
   source_arn    = aws_s3_bucket.reporting_bucket.arn
 }
+
+resource "aws_lambda_layer_version" "smartsheet_lambda_layer" {
+    filename = "${path.module}/functions/report_to_smartsheet/smartsheet.zip"
+    layer_name = "smartsheet_sdk"
+
+    compatible_runtimes = ["python3.11"]
+}
