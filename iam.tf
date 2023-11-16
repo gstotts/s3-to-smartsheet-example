@@ -41,3 +41,8 @@ resource "aws_iam_policy" "reporting_lambda_iam_policy" {
     ]
   })
 }
+
+resource "aws_iam_role_policy_attachment" "reporting_lambda_role_attach" {
+  role       = aws_iam_role.reporting_lambda_role.name
+  policy_arn = aws_iam_policy.reporting_lambda_iam_policy.arn
+}
