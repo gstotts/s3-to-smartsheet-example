@@ -1,6 +1,6 @@
 .PHONY: zip
 zip:
-	zip functions/report_to_smartsheet/ReportToSmartsheet.zip functions/report_to_smartsheet/ReportToSmartsheet.py
+	cd functions/report_to_smartsheet && zip ReportToSmartsheet.zip ReportToSmartsheet.py
 
 .PHONY: init
 init:
