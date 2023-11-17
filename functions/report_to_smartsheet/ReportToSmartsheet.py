@@ -4,6 +4,7 @@ import boto3
 import urllib.parse
 import logging
 import smartsheet
+import os
 
 region = "us-east-2"
 s3 = boto3.client('s3', region_name=region)
@@ -31,18 +32,11 @@ def get_file_from_s3(event):
         raise e
     logger.info(f'[+] Successfully Retrieved {key} from {bucket}')
 
-    try:
-        data = response['Body'].read().decode('utf-8')
-    except Exception as e:
-        logger.error(f'[-] Error Reading and Decoding File {key}')
-        logger.error(e)
-        raise e
-    logger.info(f'[+] Successfully read data from {key}')
-
+    logger.info(f'[+] Writing Data to Temp File')
     with open('/tmp/data.csv', 'wb') as file:
-        file.write(data)
+        file.write(response['Body'])
 
-    return '/mp/data.csv', key.split(".")[0]
+    return '/tmp/data.csv', key.split(".")[0]
 
 def upload_to_smartsheet(temp_file, sheet_name):
     try:
@@ -69,7 +63,8 @@ def upload_to_smartsheet(temp_file, sheet_name):
     else:
         logger.info(f'[+] Attaching New Data to {sheet_name}')
 
-
+    logger.info(f'[+] Deleting Temp Data File')
+    os.remove('/tmp/data.csv')
 
 
 
