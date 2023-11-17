@@ -17,7 +17,7 @@ resource "aws_lambda_function" "file_drop_lambda" {
 
   environment {
     variables = {
-        SMARTSHEET_ACCESS_TOKEN = jsondecode(data.aws_secretsmanager_secret_version.smar_access_token.secret_string["token"])
+        SMARTSHEET_ACCESS_TOKEN = jsondecode(data.aws_secretsmanager_secret_version.smar_access_token.secret_string)["token"]
     }
   }
 
