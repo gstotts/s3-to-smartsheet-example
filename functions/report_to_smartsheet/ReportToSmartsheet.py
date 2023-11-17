@@ -39,10 +39,10 @@ def get_file_from_s3(event):
         raise e
     logger.info(f'[+] Successfully read data from {key}')
 
-    with open('/tmp/data.csv', 'rb') as file:
+    with open('tmp/data.csv', 'rb') as file:
         file.write(data)
 
-    return '/tmp/data.csv', key.split(".")[0]
+    return 'tmp/data.csv', key.split(".")[0]
 
 def upload_to_smartsheet(temp_file, sheet_name):
     try:
@@ -68,7 +68,7 @@ def upload_to_smartsheet(temp_file, sheet_name):
 
     else:
         logger.info(f'[+] Attaching New Data to {sheet_name}')
-        
+
 
 
 
