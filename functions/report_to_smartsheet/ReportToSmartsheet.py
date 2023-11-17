@@ -32,9 +32,16 @@ def get_file_from_s3(event):
         raise e
     logger.info(f'[+] Successfully Retrieved {key} from {bucket}')
 
-    logger.info(f'[+] Writing Data to Temp File')
-    with open('/tmp/data.csv', 'wb') as file:
-        file.write(response['Body'])
+    try:
+        data = response['Body'].read().decode('utf-8')
+    except Exception as e:
+        logger.error(f'[-] Error Reading and Decoding File {key}')
+        logger.error(e)
+        raise e
+    logger.info(f'[+] Successfully read data from {key}')
+
+    with open('/tmp/data.csv', 'w') as file:
+        file.write(data)
 
     return '/tmp/data.csv', key.split(".")[0]
 
@@ -63,7 +70,6 @@ def upload_to_smartsheet(temp_file, sheet_name):
     else:
         logger.info(f'[+] Attaching New Data to {sheet_name}')
 
-    logger.info(f'[+] Deleting Temp Data File')
     os.remove('/tmp/data.csv')
 
 
