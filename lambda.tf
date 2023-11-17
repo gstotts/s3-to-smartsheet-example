@@ -15,6 +15,12 @@ resource "aws_lambda_function" "file_drop_lambda" {
   source_code_hash = filebase64sha256("${path.module}/functions/report_to_smartsheet/ReportToSmartsheet.zip")
   layers           = [aws_lambda_layer_version.smartsheet_lambda_layer.arn]
 
+  environment {
+    variables = {
+        SMARTSHEET_ACCESS_TOKEN = jsondecode(data.aws_secretsmanager_secret_version.smar_access_token.secret_string["token"])
+    }
+  }
+
   tags = merge({ "Name" : "reporting-lambda" }, var.tag_all)
 }
 
