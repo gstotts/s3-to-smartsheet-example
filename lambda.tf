@@ -30,5 +30,7 @@ resource "aws_lambda_layer_version" "smartsheet_lambda_layer" {
   filename   = "${path.module}/functions/report_to_smartsheet/smartsheet.zip"
   layer_name = "smartsheet_sdk"
 
+  compatible_architectures = [ "arm64" ]
   compatible_runtimes = ["python3.11"]
+
 }
