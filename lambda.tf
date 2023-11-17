@@ -11,6 +11,7 @@ resource "aws_lambda_function" "file_drop_lambda" {
   role             = aws_iam_role.reporting_lambda_role.arn
   handler          = "ReportToSmartsheet.lambda_handler"
   runtime          = "python3.11"
+  architectures    = ["arm64"]
   source_code_hash = filebase64sha256("${path.module}/functions/report_to_smartsheet/ReportToSmartsheet.zip")
   layers           = [aws_lambda_layer_version.smartsheet_lambda_layer.arn]
 
