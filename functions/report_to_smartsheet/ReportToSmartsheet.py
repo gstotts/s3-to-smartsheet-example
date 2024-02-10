@@ -82,7 +82,7 @@ def upload_sheet(sheet):
     )
 
 def create_sheet(sheet_name, data):
-    sheet = smartsheet.sheets.Sheet()
+    sheet = smartsheet.models.sheet.Sheet()
     sheet.title = sheet_name
 
     column_headers = data[0]
