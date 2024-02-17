@@ -75,8 +75,14 @@ def get_file_from_s3(event):
 #     os.remove('/tmp/data.csv')
 
 def upload_sheet(sheet):
+    try:
+        smart = smartsheet.Smartsheet()
+        smart.errors_as_exceptions(True)
+    except ValueError as e:
+        logger.error(f'[-] Error: SMARTSHEET_ACCESS_TOKEN must be set')
+        raise e
     logger.info(f'[+] Uploading Sheet: {sheet.name}')
-    sheet = smartsheet.Folders.create_sheet_in_folder(
+    sheet = smart.Folders.create_sheet_in_folder(
         FOLDER_ID,
         sheet
     )
