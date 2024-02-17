@@ -89,7 +89,7 @@ def create_sheet(data, sheet_name):
         
         rows.append(row)
 
-    sheet = smartsheet.Sheets.get_sheet(result.data.id)
+    sheet = smart.Sheets.get_sheet(result.data.id)
     sheet.add_rows(rows)
             
     return sheet
