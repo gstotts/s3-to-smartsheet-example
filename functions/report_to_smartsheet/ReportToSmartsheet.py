@@ -96,6 +96,8 @@ def create_sheet(sheet_name, data):
         col.title = column_name
         sheet.columns.append(col)
         count += 1
+    
+    return sheet
 
 
 
