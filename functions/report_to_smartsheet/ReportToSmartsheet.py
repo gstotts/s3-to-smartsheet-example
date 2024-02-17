@@ -75,8 +75,6 @@ def create_sheet(data, sheet_name):
         sheet
     )
 
-    sheet = smartsheet.Sheets.get_sheet(result.data.id)
-
     rows = []
     for row in data.splitlines()[1:]:
         new_row = smartsheet.models.row.Row()
@@ -84,7 +82,7 @@ def create_sheet(data, sheet_name):
         column = 0
         for data in row.split(','):
             cell = smartsheet.models.cell.Cell()
-            cell.column_id = sheet.columns[0].id
+            cell.column_id = result.data.columns[column].id
             cell.value = data
             new_row.cells.append(cell)
             column += 1
