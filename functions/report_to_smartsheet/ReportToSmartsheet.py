@@ -45,7 +45,8 @@ def get_file_from_s3(event):
     # with open('/tmp/data.csv', 'w') as file:
     #     file.write(data)
 
-    return data, key.split(".")[0]
+    logger.info(f'{key.split('.')[0]}')
+    return data, key.split('.')[0]
 
 # def upload_to_smartsheet(temp_file, sheet_name):
 #     try:
@@ -91,11 +92,10 @@ def create_sheet(sheet_name, data):
     sheet = smartsheet.models.sheet.Sheet()
     sheet.name = sheet_name
 
-    column_headers = data[0]
-    logger.info(f'{data[0]}')
+    logger.info(f'{data.splitlines()[0]}')
     logger.info(f'{sheet}')
     count = 0
-    for column_name in column_headers:
+    for column_name in data.splitlines()[0]:
         col = smartsheet.models.column.Column()
         if count == 0:
             col.primary = True
