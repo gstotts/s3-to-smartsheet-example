@@ -42,8 +42,8 @@ def get_file_from_s3(event):
         raise e
     logger.info(f'[+] Successfully read data from {key}')
 
-    # with open('/tmp/data.csv', 'w') as file:
-    #     file.write(data)
+    with open('/tmp/data.csv', 'w') as file:
+        file.write(data)
 
     return data, key.split('.')[0]
 
@@ -103,6 +103,14 @@ def create_sheet(data, sheet_name):
         sheet.columns.append(col)
         count += 1
 
+    for row in data.splitlines()[1:]:
+        row = smartsheet.models.row.Row()
+        
+        for data in row.split(','):
+            cell = smartsheet.models.cell.Cell()
+            cell.value = data
+            row.cells.append(cell)
+            
     logger.info(f'{sheet}')
     return sheet
 
