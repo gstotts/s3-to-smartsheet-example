@@ -85,11 +85,10 @@ def create_sheet(data, sheet_name):
             cell.column_id = result.data.columns[column].id
             cell.value = data
             new_row.cells.append(cell)
-            logger.info(f'{cell}')
             column += 1
         
-        rows.append(row)
-    logger.info(f'{rows}')
+        rows.append(new_row)
+
 
     sheet = smart.Sheets.get_sheet(result.data.id)
     sheet.add_rows(rows)
