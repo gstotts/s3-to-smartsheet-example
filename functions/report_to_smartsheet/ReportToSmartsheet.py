@@ -78,6 +78,7 @@ def create_sheet(data, sheet_name):
     rows = []
     for row in data.splitlines()[1:]:
         new_row = smartsheet.models.row.Row()
+        new_row.to_top = True
         
         column = 0
         for data in row.split(','):
