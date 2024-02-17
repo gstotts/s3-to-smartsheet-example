@@ -92,6 +92,8 @@ def create_sheet(sheet_name, data):
     sheet.name = sheet_name
 
     column_headers = data[0]
+    logger.info(f'{data[0]}')
+    logger.info(f'{sheet}')
     count = 0
     for column_name in column_headers:
         col = smartsheet.models.column.Column()
@@ -102,7 +104,7 @@ def create_sheet(sheet_name, data):
         col.title = column_name
         sheet.columns.append(col)
         count += 1
-    
+    logger.info(f'{sheet}')
     return sheet
 
 
