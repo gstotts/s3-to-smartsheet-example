@@ -91,18 +91,18 @@ def create_sheet(data, sheet_name):
     sheet = smartsheet.models.sheet.Sheet()
     sheet.name = sheet_name
 
-    logger.info(f'{data.splitlines()[0]}')
-
     count = 0
-    for column_name in data.splitlines()[0]:
+    for column_name in (data.splitlines()[0]).split(','):
         col = smartsheet.models.column.Column()
         if count == 0:
             col.primary = True
         else:
             col.primary = False
         col.title = column_name
+        col.type = smartsheet.models.enums.column_type.ColumnType.TEXT_NUMBER
         sheet.columns.append(col)
         count += 1
+
     logger.info(f'{sheet}')
     return sheet
 
