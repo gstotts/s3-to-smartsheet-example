@@ -75,7 +75,7 @@ def create_sheet(data, sheet_name):
         sheet
     )
 
-    logger.info(f'{result}')
+    sheet = smartsheet.Sheets.get_sheet(result.data.id)
 
     rows = []
     for row in data.splitlines()[1:]:
