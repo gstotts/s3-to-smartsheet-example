@@ -4,7 +4,6 @@ import boto3
 import urllib.parse
 import logging
 import smartsheet
-import os
 
 FOLDER_ID = "678637063169924"
 region = "us-east-2"
@@ -101,7 +100,7 @@ def create_sheet(data, sheet_name):
 def lambda_handler(event, context):
     logger.info(f'[+] Lambda Invocation Starting')
     data, sheet_name = get_file_from_s3(event)
-    sheet = create_sheet(data, sheet_name)
+    create_sheet(data, sheet_name)
 
     return {
         'statusCode': 200,
