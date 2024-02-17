@@ -17,7 +17,7 @@ resource "aws_lambda_function" "file_drop_lambda" {
 
   environment {
     variables = {
-        SMARTSHEET_ACCESS_TOKEN = jsondecode(data.aws_secretsmanager_secret_version.smar_access_token.secret_string)["token"]
+      SMARTSHEET_ACCESS_TOKEN = jsondecode(data.aws_secretsmanager_secret_version.smar_access_token.secret_string)["token"]
     }
   }
 
@@ -36,7 +36,13 @@ resource "aws_lambda_layer_version" "smartsheet_lambda_layer" {
   filename   = "${path.module}/functions/report_to_smartsheet/smartsheet.zip"
   layer_name = "smartsheet_sdk"
 
-  compatible_architectures = [ "arm64" ]
-  compatible_runtimes = ["python3.11"]
+  compatible_architectures = ["arm64"]
+  compatible_runtimes      = ["python3.11"]
 
+}
+
+resource "aws_lambda_function_event_invoke_config" "error_handle" {
+  function_name                = aws_lambda_function.file_drop_lambda.function_name
+  maximum_event_age_in_seconds = 60
+  maximum_retry_attempts       = 0
 }
