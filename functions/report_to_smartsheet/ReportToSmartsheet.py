@@ -75,7 +75,7 @@ def get_file_from_s3(event):
 #     os.remove('/tmp/data.csv')
 
 def upload_sheet(sheet):
-    logger.info(f'[+] Uploading Sheet: {sheet.title}')
+    logger.info(f'[+] Uploading Sheet: {sheet.name}')
     sheet = smartsheet.Folders.create_sheet_in_folder(
         FOLDER_ID,
         sheet
@@ -83,7 +83,7 @@ def upload_sheet(sheet):
 
 def create_sheet(sheet_name, data):
     sheet = smartsheet.models.sheet.Sheet()
-    sheet.title = sheet_name
+    sheet.name = sheet_name
 
     column_headers = data[0]
     count = 0
