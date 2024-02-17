@@ -70,10 +70,12 @@ def create_sheet(data, sheet_name):
         logger.error(f'[-] Error: SMARTSHEET_ACCESS_TOKEN must be set')
         raise e
     logger.info(f'[+] Creating Sheet: {sheet.name}')
-    sheet = smart.Folders.create_sheet_in_folder(
+    result = smart.Folders.create_sheet_in_folder(
         FOLDER_ID,
         sheet
     )
+
+    logger.info(f'{result}')
 
     rows = []
     for row in data.splitlines()[1:]:
