@@ -104,12 +104,14 @@ def create_sheet(data, sheet_name):
         count += 1
 
     for row in data.splitlines()[1:]:
-        row = smartsheet.models.row.Row()
+        new_row = smartsheet.models.row.Row()
         
         for data in row.split(','):
             cell = smartsheet.models.cell.Cell()
             cell.value = data
-            row.cells.append(cell)
+            new_row.cells.append(cell)
+        
+        sheet.rows.append(row)
             
     logger.info(f'{sheet}')
     return sheet
