@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "reporting_bucket" {
   tags   = merge({ "Name" : "reporting-${local.account_id}" }, var.tag_all)
 }
 
-resource "aws_bucket_server_side_encryption_configuration" "default" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
     bucket = aws_s3_bucket.reporting_bucket.id
 
     rule {
