@@ -1,7 +1,7 @@
 terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
-    organization = "gregorystotts-dot-com"
+    organization = "stotts-dot-xyz"
 
     workspaces {
       name = "lambda-example"
